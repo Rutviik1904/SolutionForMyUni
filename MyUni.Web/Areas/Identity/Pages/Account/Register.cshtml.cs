@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using MyUni.Web.Models;
+using MyUni.Web.Models.Enums;
 
 namespace MyUni.Web.Areas.Identity.Pages.Account
 {
@@ -61,6 +63,33 @@ namespace MyUni.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Display Name")]
+            [Required(ErrorMessage = "{0} cannot be empty.")]
+            [MinLength(2, ErrorMessage = "{0} should have at least {1} characters.")]
+            [StringLength(60, ErrorMessage = "{0} cannot have more than {1} characters.")]
+            public string DisplayName { get; set; }
+
+
+            [Display(Name = "Date of Birth")]
+            [Required]
+            [PersonalData]
+            [Column(TypeName = "smalldatetime")]
+            public DateTime DateOfBirth { get; set; }
+
+            [Required]
+            [Display(Name = "Gender")]
+            [PersonalData]
+            public MyIdentityGenders Gender { get; set; }
+
+
+            [Required(ErrorMessage = "Please enter Your Phone Number")]
+            [Display(Name = "MobileNumber")]
+            [PersonalData]
+            public string MobileNumber { get; set; }
+
+
+            
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,7 +104,15 @@ namespace MyUni.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new MyIdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new MyIdentityUser {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    DisplayName = Input.DisplayName,
+                    DateOfBirth = Input.DateOfBirth,
+                    Gender = Input.Gender,
+                    MobileNumber = Input.MobileNumber,
+                    
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

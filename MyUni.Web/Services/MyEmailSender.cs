@@ -33,7 +33,7 @@ namespace MyUni.Web.Services
         /// <param name="subject">Subject of the Email</param>
         /// <param name="htmlMessage">HTML Text for the Email</param>
         /// <returns>Task to indicate if email was successfully sent.</returns>
-        /// <exception cref="GuniApp.Web.Services.MyEmailSenderException" />
+        /// <exception cref="MyUni.Web.Services.MyEmailSenderException" />
         /// <example>
         /// <![CDATA[
         ///     SendEmailAsync("demo@abc.com", "hello", "<p>Hello World</p>");

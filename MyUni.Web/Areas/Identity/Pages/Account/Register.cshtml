@@ -1,4 +1,5 @@
 ﻿@page
+@using MyUni.Web.Models.Enums
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -27,6 +28,46 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+                <div class="form-group">
+                <label asp-for="Input.DisplayName"></label>
+                <input asp-for="Input.DisplayName" class="form-control" />
+                <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+                <label asp-for="Input.DateOfBirth"></label>
+                <input asp-for="Input.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+            </div>
+                
+            <div class="form-group">
+                <label asp-for="Input.Gender"></label>
+                <br />
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                         id="Input.Gender.Male" name="Input.Gender" 
+                         value="@MyIdentityGenders.Male" />
+                         Male
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                         id="Input.Gender.Female" name="Input.Gender" 
+                         value="@MyIdentityGenders.Female" />
+                         Female
+                    </label><label class="btn btn-secondary">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                         id="Input.Gender.ThirdGender" name="Input.Gender" 
+                         value="@MyIdentityGenders.Male" />
+                         Third Gender
+                    </label>
+                </div>
+                <div class="form-group">
+                <label asp-for="Input.MobileNumber"></label>
+                <input asp-for="Input.MobileNumber" class="form-control" />
+                <span asp-validation-for="Input.MobileNumber" class="text-danger"></span>
+            </div>
+
+
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
