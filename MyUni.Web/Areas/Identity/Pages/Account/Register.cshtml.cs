@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using MyUni.Web.Data;
 using MyUni.Web.Models;
 using MyUni.Web.Models.Enums;
 
@@ -26,13 +27,16 @@ namespace MyUni.Web.Areas.Identity.Pages.Account
         private readonly UserManager<MyIdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
+            ApplicationDbContext context,
             UserManager<MyIdentityUser> userManager,
             SignInManager<MyIdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -88,8 +92,14 @@ namespace MyUni.Web.Areas.Identity.Pages.Account
             [PersonalData]
             public string MobileNumber { get; set; }
 
+            [Display(Name = "Select Your User Role")]
+            [Required]
+            public MyIdentityRoleNames UserRole { get; set; }
 
-            
+           
+
+
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -111,12 +121,17 @@ namespace MyUni.Web.Areas.Identity.Pages.Account
                     DateOfBirth = Input.DateOfBirth,
                     Gender = Input.Gender,
                     MobileNumber = Input.MobileNumber,
+                    UserRole = Input.UserRole
                     
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+
+
+           
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

@@ -1,0 +1,52 @@
+﻿@model MyUni.Web.Models.Review
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Review</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SubmissionId" class="control-label"></label>
+                <select asp-for="SubmissionId" class ="form-control" asp-items="ViewBag.SubmissionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnrollmentID" class="control-label"></label>
+                <input asp-for="EnrollmentID" class="form-control" />
+                <span asp-validation-for="EnrollmentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReviewedBy" class="control-label"></label>
+                <input asp-for="ReviewedBy" class="form-control" />
+                <span asp-validation-for="ReviewedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReviewedOn" class="control-label"></label>
+                <input asp-for="ReviewedOn" class="form-control" />
+                <span asp-validation-for="ReviewedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReviewRemarks" class="control-label"></label>
+                <input asp-for="ReviewRemarks" class="form-control" />
+                <span asp-validation-for="ReviewRemarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

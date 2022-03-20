@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MyUni.Web.Models.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -38,5 +39,11 @@ namespace MyUni.Web.Models
         [Display(Name = "Select Your User Role")]
         [Required]
         public MyIdentityRoleNames UserRole { get; set; }
+
+        public Student Student { get; set; }
+        public Faculty Faculty { get; set; }
+
+
+
     }
 }

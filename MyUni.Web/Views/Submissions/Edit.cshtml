@@ -1,0 +1,59 @@
+﻿@model MyUni.Web.Models.Submission
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Submission</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SubmissionId" />
+            <div class="form-group">
+                <label asp-for="ThesisId" class="control-label"></label>
+                <select asp-for="ThesisId" class="form-control" asp-items="ViewBag.ThesisId"></select>
+                <span asp-validation-for="ThesisId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThesisFileUrl" class="control-label"></label>
+                <input asp-for="ThesisFileUrl" class="form-control" />
+                <span asp-validation-for="ThesisFileUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileContentType" class="control-label"></label>
+                <input asp-for="FileContentType" class="form-control" />
+                <span asp-validation-for="FileContentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubmissionDesc" class="control-label"></label>
+                <input asp-for="SubmissionDesc" class="form-control" />
+                <span asp-validation-for="SubmissionDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubmissionDue" class="control-label"></label>
+                <input asp-for="SubmissionDue" class="form-control" />
+                <span asp-validation-for="SubmissionDue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubmissionOn" class="control-label"></label>
+                <input asp-for="SubmissionOn" class="form-control" />
+                <span asp-validation-for="SubmissionOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

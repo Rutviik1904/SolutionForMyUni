@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MyUni.Web.Models.Submission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ThesisAssign)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThesisFileUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileContentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmissionDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmissionDue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmissionOn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThesisAssign.EnrollmentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThesisFileUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileContentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmissionDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmissionDue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmissionOn)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SubmissionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SubmissionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SubmissionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
